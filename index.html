@@ -567,8 +567,8 @@
         
         // --- KOORDINAT GERAI UTAMA ANGKRINGAN SENTHIR ---
         // Ganti koordinat latitude & longitude di bawah sesuai dengan titik GPS asli toko Anda
-        const SENTHIR_LAT = -6.3979491; 
-        const SENTHIR_LON = 107.0768198;
+        const SENTHIR_LAT = -6.402346904708994; 
+        const SENTHIR_LON = 107.06749770705274;
 
         let cart = [];
         let isStoreOpen = true;
@@ -717,18 +717,28 @@
 
         // --- LOGIKA PENENTUAN TARIF ONGKIR BERDASARKAN JARAK ---
         function determineOngkirRate(distance) {
-            if (distance >= 0 && distance <= 1) {
-                return 3000;
-            } else if (distance > 1 && distance <= 2) {
-                return 5000;
-            } else if (distance > 2 && distance <= 3) {
-                return 10000;
-            } else if (distance > 3 && distance <= 5) {
-                return 15000;
-            } else {
-                return -1; // Penanda khusus jika jarak > 5 km (di luar jangkauan kurir)
-            }
-        }
+    // Bulatkan jarak agar perbandingan lebih stabil
+    const dist = parseFloat(distance.toFixed(2)); 
+    
+    if (dist <= 1) return 3000;
+    if (dist <= 2) return 5000;
+    if (dist <= 3) return 10000;
+    if (dist <= 5) return 15000;
+    
+    return -1; // Jarak di luar jangkauan (lebih dari 5km)
+}
+
+// CARA PANGGIL DI SCRIPT UTAMA:
+let ongkir = determineOngkirRate(jarak);
+
+if (ongkir === -1) {
+    alert("Maaf, jarak terlalu jauh (lebih dari 5km).");
+    // Sembunyikan elemen ongkir di UI
+} else {
+    // Tampilkan ongkir di UI
+    console.log("Ongkir yang didapat: Rp " + ongkir);
+    document.getElementById("tampilanOngkir").innerText = "Rp " + ongkir.toLocaleString('id-ID');
+}
 
         // --- SINKRONISASI API GEOLOCATION & UPDATE SYNC JARAK ONGKIR ---
         function getLocation() {
