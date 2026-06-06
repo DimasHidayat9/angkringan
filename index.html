@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Angkringan Senthir - Tempat Ngopi Asik & Kuliner Tradisional</title>
+    <meta name="description" content="Angkringan Senthir menghadirkan suasana hangat tradisional dengan menu andalan Nasi Bakar, Aneka Sate, dan Wedang Jahe murni asli di Bekasi. Pesan mudah via WhatsApp.">
+    <meta name="keywords" content="angkringan senthir, nasi bakar bekasi, wedang jahe, angkringan malam, kuliner tradisional, kopi joss">
+    <meta name="author" content="Dimas">
+    
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://angkringansenthir.com/">
+    <meta property="og:title" content="Angkringan Senthir - Tempat Ngopi Asik">
+    <meta property="og:description" content="Ngemil asik, wedangan hangat, dan obrolan santai. Pesan menumu sekarang langsung lewat WhatsApp!">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1568649929103-28ffbefaca1e?q=80&w=600">
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            scroll-behavior: smooth; 
+        }
+        .hero-bg {
+            background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('bg.png') no-repeat center center/cover;
+        }
+
+        /* --- ANIMASI & STYLE NAVIGASI BAR --- */
+        .nav-link {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+        .nav-link:active i {
+            transform: scale(0.75);
+        }
+        .nav-link.active i {
+            transform: scale(1.2) translateY(-4px);
+            color: #f59e0b !important;
+            text-shadow: 0 0 12px rgba(245, 158, 11, 0.6);
+        }
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            width: 12px;
+            height: 3px;
+            background-color: #f59e0b;
+            border-radius: 99px;
+            animation: fadeInLine 0.25s ease-out forwards;
+        }
+
+        @keyframes fadeInLine {
+            from { width: 0; opacity: 0; }
+            to { width: 12px; opacity: 1; }
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+            50% { box-shadow: 0 0 15px 4px rgba(16, 185, 129, 0.2); }
+        }
+        .btn-wa-animate:not(:disabled) {
+            animation: pulse-glow 2s infinite;
+        }
+
+        /* Animasi Transisi Halus untuk Elemen Dinamis */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fadeIn {
+            animation: fadeIn 0.35s ease-out forwards;
+        }
+    </style>
+</head>
+<body class="bg-stone-900 text-stone-100 min-h-screen pb-24 md:pb-12">
+
+    <div id="toast" class="fixed top-5 left-1/2 -translate-x-1/2 bg-amber-500 text-stone-950 px-5 py-2.5 rounded-full font-bold shadow-2xl z-50 text-xs md:text-sm opacity-0 pointer-events-none transition-all duration-300 transform -translate-y-4 max-w-[90%] text-center whitespace-nowrap overflow-hidden text-ellipsis">
+        <i class="fas fa-check-circle mr-1.5"></i> <span id="toast-text">Menu ditambahkan!</span>
+    </div>
+
+    <header class="hero-bg h-screen flex flex-col justify-center items-center text-center px-4 relative">
+        <h1 class="text-4xl md:text-7xl font-bold text-amber-500 tracking-wider mb-2 drop-shadow-lg select-none">ANGKRINGAN SENTHIR</h1>
+        <p class="text-sm md:text-2xl text-stone-300 max-w-md italic px-2">"Tempat Terbaik Melepas Penat, Ditemani Kopi Hangat"</p>
+        
+        <div id="status-toko-badge" class="mt-4 px-4 py-1.5 rounded-full font-bold text-[10px] md:text-xs uppercase tracking-widest shadow-md">
+            Memeriksa Status...
+        </div>
+
+        <div class="absolute bottom-12 animate-bounce">
+            <a href="#about" class="text-amber-500 text-2xl hover:text-amber-400 transition-colors duration-200"><i class="fas fa-chevron-down"></i></a>
+        </div>
+    </header>
+
+    <nav class="bg-stone-950/95 backdrop-blur-md border-t border-stone-800 fixed bottom-0 left-0 right-0 z-40 py-3 px-2 flex justify-around items-center md:top-0 md:bottom-auto md:border-t-0 md:border-b">
+        <a href="#" class="nav-link active flex flex-col items-center text-stone-400 hover:text-stone-200"><i class="fas fa-home text-base md:text-lg"></i><span class="text-[9px] md:text-[11px] md:hidden mt-1">Home</span></a>
+        <a href="#about" class="nav-link flex flex-col items-center text-stone-400 hover:text-stone-200"><i class="fas fa-info-circle text-base md:text-lg"></i><span class="text-[9px] md:text-[11px] md:hidden mt-1">About</span></a>
+        <a href="#katalog" class="nav-link flex flex-col items-center text-stone-400 hover:text-stone-200"><i class="fas fa-utensils text-base md:text-lg"></i><span class="text-[9px] md:text-[11px] md:hidden mt-1">Menu</span></a>
+        <a href="#bestseller" class="nav-link flex flex-col items-center text-stone-400 hover:text-stone-200"><i class="fas fa-star text-base md:text-lg"></i><span class="text-[9px] md:text-[11px] md:hidden mt-1">Best</span></a>
+        <a href="#pesan" class="nav-link flex flex-col items-center text-stone-400 hover:text-stone-200 relative">
+            <i class="fas fa-shopping-cart text-base md:text-lg"></i>
+            <span id="cart-count" class="absolute -top-1 -right-1 bg-amber-500 text-stone-950 text-[8px] md:text-[10px] font-bold rounded-full w-3.5 h-3.5 flex items-center justify-center hidden">0</span>
+            <span class="text-[9px] md:text-[11px] md:hidden mt-1">Order</span>
+        </a>
+        <a href="#sosmed" class="nav-link flex flex-col items-center text-stone-400 hover:text-stone-200"><i class="fas fa-map-marker-alt text-base md:text-lg"></i><span class="text-[9px] md:text-[11px] md:hidden mt-1">Kontak</span></a>
+    </nav>
+
+    <div class="max-w-4xl mx-auto px-4 pt-4 md:pt-24">
+        
+        <section id="about" class="py-12 md:py-16 border-b border-stone-800">
+    <h2 class="text-2xl md:text-3xl font-bold text-amber-500 text-center mb-6">Kisah Senthir</h2>
+    <div class="bg-stone-800/50 p-5 md:p-6 rounded-2xl border border-stone-700/50 text-center md:text-left md:flex md:items-center md:gap-6 hover:border-stone-600 transition-all duration-300">
+        <img src="https://images.unsplash.com/photo-1543007630-9710e4a00a20?q=80&w=400" alt="Tentang Senthir" class="w-full md:w-1/3 h-40 md:h-48 object-cover rounded-xl mb-4 md:mb-0 shadow-md" onerror="this.src='https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=400'">
+        <div>
+            <p class="text-sm md:text-base text-stone-300 leading-relaxed text-justify mb-4">
+                Berawal dari keinginan menghadirkan ruang santai yang hangat di tengah huru-hara kota, <strong>Angkringan Senthir</strong> hadir bukan sekadar tempat makan biasa, melainkan sebuah ruang temu. Nama <em>Senthir</em> diambil dari lampu minyak tradisional Jawa, melambangkan cahaya kecil yang memberikan kehangatan sejati dan kebersamaan.
+            </p>
+            <p class="text-sm md:text-base text-stone-300 leading-relaxed text-justify">
+                Di sini, kami menyajikan berbagai minuman hangat seperti kopi pilihan, wedang tradisional, dan berbagai hidangan khas angkringan dengan cita rasa otentik yang siap menemani obrolan asik kamu sampai larut malam.
+            </p>
+        </div>
+    </div>
+</section>
+        <section id="katalog" class="py-12 md:py-16 border-b border-stone-800">
+            <h2 class="text-2xl md:text-3xl font-bold text-amber-500 text-center mb-1">Katalog Menu</h2>
+            <p class="text-stone-400 text-center text-xs md:text-sm mb-6 md:text-sm md:mb-8">Daftar hidangan dan seduhan khas Angkringan Senthir</p>
+            
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 md:gap-4">
+                <div class="bg-stone-800 rounded-xl overflow-hidden shadow-lg border border-stone-700 hover:border-amber-500/50 transition-all duration-300 group">
+                    <div class="overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=300" class="w-full h-24 md:h-32 object-cover group-hover:scale-105 transition-transform duration-300" alt="Nasi Bakar" onerror="this.src='https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=300'">
+                    </div>
+                    <div class="p-2 md:p-3 text-center"><p class="font-semibold text-xs md:text-sm text-stone-200">Aneka Nasi Bakar</p></div>
+                </div>
+                <div class="bg-stone-800 rounded-xl overflow-hidden shadow-lg border border-stone-700 hover:border-amber-500/50 transition-all duration-300 group">
+                    <div class="overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1608897013039-887f21d8c804?q=80&w=300" class="w-full h-24 md:h-32 object-cover group-hover:scale-105 transition-transform duration-300" alt="Nasi Kucing" onerror="this.src='https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=300'">
+                    </div>
+                    <div class="p-2 md:p-3 text-center"><p class="font-semibold text-xs md:text-sm text-stone-200">Aneka Nasi Kucing</p></div>
+                </div>
+                <div class="bg-stone-800 rounded-xl overflow-hidden shadow-lg border border-stone-700 hover:border-amber-500/50 transition-all duration-300 group">
+                    <div class="overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?q=80&w=300" class="w-full h-24 md:h-32 object-cover group-hover:scale-105 transition-transform duration-300" alt="Aneka Sate" onerror="this.src='https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=300'">
+                    </div>
+                    <div class="p-2 md:p-3 text-center"><p class="font-semibold text-xs md:text-sm text-stone-200">Aneka Sate-Satean</p></div>
+                </div>
+                <div class="bg-stone-800 rounded-xl overflow-hidden shadow-lg border border-stone-700 hover:border-amber-500/50 transition-all duration-300 group">
+                    <div class="overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?q=80&w=300" class="w-full h-24 md:h-32 object-cover group-hover:scale-105 transition-transform duration-300" alt="Tahu Bacem" onerror="this.src='https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=300'">
+                    </div>
+                    <div class="p-2 md:p-3 text-center"><p class="font-semibold text-xs md:text-sm text-stone-200">Tahu Bacem</p></div>
+                </div>
+                <div class="bg-stone-800 rounded-xl overflow-hidden shadow-lg border border-stone-700 hover:border-amber-500/50 transition-all duration-300 group">
+                    <div class="overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1584269600464-37b1b58a9fe7?q=80&w=300" class="w-full h-24 md:h-32 object-cover group-hover:scale-105 transition-transform duration-300" alt="Tempe Bacem" onerror="this.src='https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=300'">
+                    </div>
+                    <div class="p-2 md:p-3 text-center"><p class="font-semibold text-xs md:text-sm text-stone-200">Tempe Bacem</p></div>
+                </div>
+                <div class="bg-stone-800 rounded-xl overflow-hidden shadow-lg border border-stone-700 hover:border-amber-500/50 transition-all duration-300 group">
+                    <div class="overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1573080496219-bb080dd4f877?q=80&w=300" class="w-full h-24 md:h-32 object-cover group-hover:scale-105 transition-transform duration-300" alt="Aneka Gorengan" onerror="this.src='https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=300'">
+                    </div>
+                    <div class="p-2 md:p-3 text-center"><p class="font-semibold text-xs md:text-sm text-stone-200">Aneka Gorengan</p></div>
+                </div>
+                <div class="bg-stone-800 rounded-xl overflow-hidden shadow-lg border border-stone-700 hover:border-amber-500/50 transition-all duration-300 group">
+                    <div class="overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?q=80&w=300" class="w-full h-24 md:h-32 object-cover group-hover:scale-105 transition-transform duration-300" alt="Minuman" onerror="this.src='https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=300'">
+                    </div>
+                    <div class="p-2 md:p-3 text-center"><p class="font-semibold text-xs md:text-sm text-stone-200">Kopi Hitam</p></div>
+                </div>
+                <div class="bg-stone-800 rounded-xl overflow-hidden shadow-lg border border-stone-700 hover:border-amber-500/50 transition-all duration-300 group">
+                    <div class="overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=300" class="w-full h-24 md:h-32 object-cover group-hover:scale-105 transition-transform duration-300" alt="Aneka Kopi" onerror="this.src='https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=300'">
+                    </div>
+                    <div class="p-2 md:p-3 text-center"><p class="font-semibold text-xs md:text-sm text-stone-200">Minuman Dingin</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="bestseller" class="py-12 md:py-16 border-b border-stone-800">
+            <div class="bg-gradient-to-br from-amber-950/40 to-stone-800 p-5 md:p-6 rounded-3xl border border-amber-500/30 shadow-xl">
+                <span class="bg-amber-500 text-stone-950 text-[10px] md:text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">🌟 Menu Andalan</span>
+                <h2 class="text-2xl md:text-3xl font-bold text-amber-500 mt-2 mb-4">Wedang Jahe Senthir</h2>
+                
+                <div class="w-full h-48 md:h-64 rounded-2xl overflow-hidden mb-5 shadow-2xl border border-stone-700 relative group">
+                    <img src="https://images.unsplash.com/photo-1594911774802-8822a7079af1?q=80&w=800" class="w-full h-full object-cover group-hover:scale-102 transition-transform duration-500" alt="Wedang Jahe Jumbo" onerror="this.src='https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=800'">
+                    <div class="absolute bottom-3 right-3 md:bottom-4 md:right-4">
+                        <button onclick="addToCart('Wedang Jahe Senthir', 6000)" class="bg-amber-500 text-stone-950 font-bold text-xs md:text-sm px-4 py-2 md:px-5 md:py-2.5 rounded-xl shadow-lg hover:bg-amber-400 cursor-pointer transition-all active:scale-95"><i class="fas fa-shopping-basket mr-1"></i> Pesan</button>
+                    </div>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-3.5">
+                    <div class="bg-stone-900/60 p-4 rounded-xl border border-stone-800">
+                        <h4 class="font-semibold text-sm md:text-base text-amber-400 mb-1.5 flex items-center"><i class="fas fa-leaf mr-2 text-xs"></i>Komposisi Alami</h4>
+                        <p class="text-xs md:text-sm text-stone-300 leading-relaxed">Racikan murni Jahe Emprit bakar geprek, Gula Jawa tua asli, batang Serai memar, Kayu Manis, dan cengkeh tanpa pemanis buatan.</p>
+                    </div>
+                    <div class="bg-stone-900/60 p-4 rounded-xl border border-stone-800">
+                        <h4 class="font-semibold text-sm md:text-base text-amber-400 mb-1.5 flex items-center"><i class="fas fa-heartbeat mr-2 text-xs"></i>Khasiat & Manfaat</h4>
+                        <p class="text-xs md:text-sm text-stone-300 leading-relaxed">Sangat ampuh menghangatkan tubuh, meredakan gejala masuk angin, meningkatkan kekebalan imun, serta melemaskan otot tegang setelah capek beraktivitas.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="pesan" class="py-12 md:py-16 border-b border-stone-800">
+            <h2 class="text-2xl md:text-3xl font-bold text-amber-500 text-center mb-1">Pesan Sekarang</h2>
+            <p class="text-stone-400 text-center text-xs md:text-sm mb-6 md:mb-8">Pilih menu favoritmu di bawah ini untuk dimasukkan ke troli</p>
+
+            <div class="space-y-3 mb-8">
+                <div class="border-l-4 border-amber-500 pl-2"><span class="text-[10px] md:text-xs font-bold uppercase tracking-wider text-amber-500">Nasi Bakar</span></div>
+                <div class="bg-stone-800 p-3.5 rounded-xl flex justify-between items-center border border-stone-700 hover:border-stone-600 transition-colors shadow-sm gap-2">
+                    <div>
+                        <h4 class="font-semibold text-xs md:text-sm text-stone-200">Nasi Bakar Ayam Suir</h4>
+                        <p class="text-xs text-stone-400">Rp 7.000</p>
+                    </div>
+                    <button type="button" onclick="addToCart('Nasi Bakar Ayam Suir', 7000)" class="bg-amber-500 text-stone-950 px-3 py-2 rounded-lg font-bold text-[11px] md:text-xs hover:bg-amber-400 active:scale-95 transition-all duration-200 cursor-pointer shrink-0"><i class="fas fa-plus mr-1"></i>Troli</button>
+                </div>
+                <div class="bg-stone-800 p-3.5 rounded-xl flex justify-between items-center border border-stone-700 hover:border-stone-600 transition-colors shadow-sm gap-2">
+                    <div>
+                        <h4 class="font-semibold text-xs md:text-sm text-stone-200">Nasi Bakar Tongkol</h4>
+                        <p class="text-xs text-stone-400">Rp 7.000</p>
+                    </div>
+                    <button type="button" onclick="addToCart('Nasi Bakar Tongkol', 7000)" class="bg-amber-500 text-stone-950 px-3 py-2 rounded-lg font-bold text-[11px] md:text-xs hover:bg-amber-400 active:scale-95 transition-all duration-200 cursor-pointer shrink-0"><i class="fas fa-plus mr-1"></i>Troli</button>
+                </div>
+                <div class="bg-stone-800 p-3.5 rounded-xl flex justify-between items-center border border-stone-700 hover:border-stone-600 transition-colors shadow-sm gap-2">
+                    <div>
+                        <h4 class="font-semibold text-xs md:text-sm text-stone-200">Nasi Bakar Cumi</h4>
+                        <p class="text-xs text-stone-400">Rp 7.500</p>
+                    </div>
+                    <button type="button" onclick="addToCart('Nasi Bakar Cumi', 7500)" class="bg-amber-500 text-stone-950 px-3 py-2 rounded-lg font-bold text-[11px] md:text-xs hover:bg-amber-400 active:scale-95 transition-all duration-200 cursor-pointer shrink-0"><i class="fas fa-plus mr-1"></i>Troli</button>
+                </div>
+
+                <div class="border-l-4 border-amber-500 pl-2 pt-2"><span class="text-[10px] md:text-xs font-bold uppercase tracking-wider text-amber-500">Nasi Kucing</span></div>
+                <div class="bg-stone-800 p-3.5 rounded-xl flex justify-between items-center border border-stone-700 hover:border-stone-600 transition-colors shadow-sm gap-2">
+                    <div>
+                        <h4 class="font-semibold text-xs md:text-sm text-stone-200">Nasi Kucing Teri</h4>
+                        <p class="text-xs text-stone-400">Rp 4.000</p>
+                    </div>
+                    <button type="button" onclick="addToCart('Nasi Kucing Teri', 4000)" class="bg-amber-500 text-stone-950 px-3 py-2 rounded-lg font-bold text-[11px] md:text-xs hover:bg-amber-400 active:scale-95 transition-all duration-200 cursor-pointer shrink-0"><i class="fas fa-plus mr-1"></i>Troli</button>
+                </div>
+                <div class="bg-stone-800 p-3.5 rounded-xl flex justify-between items-center border border-stone-700 hover:border-stone-600 transition-colors shadow-sm gap-2">
+                    <div>
+                        <h4 class="font-semibold text-xs md:text-sm text-stone-200">Nasi Kucing Orek Tempe</h4>
+                        <p class="text-xs text-stone-400">Rp 4.000</p>
+                    </div>
+                    <button type="button" onclick="addToCart('Nasi Kucing Orek Tempe', 4000)" class="bg-amber-500 text-stone-950 px-3 py-2 rounded-lg font-bold text-[11px] md:text-xs hover:bg-amber-400 active:scale-95 transition-all duration-200 cursor-pointer shrink-0"><i class="fas fa-plus mr-1"></i>Troli</button>
+                </div>
+
+                <div class="border-l-4 border-amber-500 pl-2 pt-2"><span class="text-[10px] md:text-xs font-bold uppercase tracking-wider text-amber-500">Aneka Sate & Baceman</span></div>
+                <div class="bg-stone-800 p-3.5 rounded-xl flex justify-between items-center border border-stone-700 hover:border-stone-600 transition-colors shadow-sm gap-2">
+                    <div>
+                        <h4 class="font-semibold text-xs md:text-sm text-stone-200">Sate Kulit</h4>
+                        <p class="text-xs text-stone-400">Rp 2.500</p>
+                    </div>
+                    <button type="button" onclick="addToCart('Sate Kulit', 2500)" class="bg-amber-500 text-stone-950 px-3 py-2 rounded-lg font-bold text-[11px] md:text-xs hover:bg-amber-400 active:scale-95 transition-all duration-200 cursor-pointer shrink-0"><i class="fas fa-plus mr-1"></i>Troli</button>
+                </div>
+                <div class="bg-stone-800 p-3.5 rounded-xl flex justify-between items-center border border-stone-700 hover:border-stone-600 transition-colors shadow-sm gap-2">
+                    <div>
+                        <h4 class="font-semibold text-xs md:text-sm text-stone-200">Sate Usus</h4>
+                        <p class="text-xs text-stone-400">Rp 2.500</p>
+                    </div>
+                    <button type="button" onclick="addToCart('Sate Usus', 2500)" class="bg-amber-500 text-stone-950 px-3 py-2 rounded-lg font-bold text-[11px] md:text-xs hover:bg-amber-400 active:scale-95 transition-all duration-200 cursor-pointer shrink-0"><i class="fas fa-plus mr-1"></i>Troli</button>
+                </div>
+                <div class="bg-stone-800 p-3.5 rounded-xl flex justify-between items-center border border-stone-700 hover:border-stone-600 transition-colors shadow-sm gap-2">
+                    <div>
+                        <h4 class="font-semibold text-xs md:text-sm text-stone-200">Sate Ati Ampela</h4>
+                        <p class="text-xs text-stone-400">Rp 3.000</p>
+                    </div>
+                    <button type="button" onclick="addToCart('Sate Ati Ampela', 3000)" class="bg-amber-500 text-stone-950 px-3 py-2 rounded-lg font-bold text-[11px] md:text-xs hover:bg-amber-400 active:scale-95 transition-all duration-200 cursor-pointer shrink-0"><i class="fas fa-plus mr-1"></i>Troli</button>
+                </div>
+                <div class="bg-stone-800 p-3.5 rounded-xl flex justify-between items-center border border-stone-700 hover:border-stone-600 transition-colors shadow-sm gap-2">
+                    <div>
+                        <h4 class="font-semibold text-xs md:text-sm text-stone-200">Sate Telor Puyuh</h4>
+                        <p class="text-xs text-stone-400">Rp 3.500</p>
+                    </div>
+                    <button type="button" onclick="addToCart('Sate Telor Puyuh', 3500)" class="bg-amber-500 text-stone-950 px-3 py-2 rounded-lg font-bold text-[11px] md:text-xs hover:bg-amber-400 active:scale-95 transition-all duration-200 cursor-pointer shrink-0"><i class="fas fa-plus mr-1"></i>Troli</button>
+                </div>
+                <div class="bg-stone-800 p-3.5 rounded-xl flex justify-between items-center border border-stone-700 hover:border-stone-600 transition-colors shadow-sm gap-2">
+                    <div>
+                        <h4 class="font-semibold text-xs md:text-sm text-stone-200">Tahu Bacem</h4>
+                        <p class="text-xs text-stone-400">Rp 2.500</p>
+                    </div>
+                    <button type="button" onclick="addToCart('Tahu Bacem', 2500)" class="bg-amber-500 text-stone-950 px-3 py-2 rounded-lg font-bold text-[11px] md:text-xs hover:bg-amber-400 active:scale-95 transition-all duration-200 cursor-pointer shrink-0"><i class="fas fa-plus mr-1"></i>Troli</button>
+                </div>
+                <div class="bg-stone-800 p-3.5 rounded-xl flex justify-between items-center border border-stone-700 hover:border-stone-600 transition-colors shadow-sm gap-2">
+                    <div>
+                        <h4 class="font-semibold text-xs md:text-sm text-stone-200">Tempe Bacem</h4>
+                        <p class="text-xs text-stone-400">Rp 2.500</p>
+                    </div>
+                    <button type="button" onclick="addToCart('Tempe Bacem', 2500)" class="bg-amber-500 text-stone-950 px-3 py-2 rounded-lg font-bold text-[11px] md:text-xs hover:bg-amber-400 active:scale-95 transition-all duration-200 cursor-pointer shrink-0"><i class="fas fa-plus mr-1"></i>Troli</button>
+                </div>
+
+                <div class="border-l-4 border-amber-500 pl-2 pt-2"><span class="text-[10px] md:text-xs font-bold uppercase tracking-wider text-amber-500">Lauk Tambahan & Wedangan</span></div>
+                <div class="bg-stone-800 p-3.5 rounded-xl flex justify-between items-center border border-stone-700 hover:border-stone-600 transition-colors shadow-sm gap-2">
+                    <div>
+                        <h4 class="font-semibold text-xs md:text-sm text-stone-200">Sayap / Kepala Ayam</h4>
+                        <p class="text-xs text-stone-400">Rp 5.000</p>
+                    </div>
+                    <button type="button" onclick="addToCart('Sayap Ayam', 5000)" class="bg-amber-500 text-stone-950 px-3 py-2 rounded-lg font-bold text-[11px] md:text-xs hover:bg-amber-400 active:scale-95 transition-all duration-200 cursor-pointer shrink-0"><i class="fas fa-plus mr-1"></i>Troli</button>
+                </div>
+                <div class="bg-stone-800 p-3.5 rounded-xl flex justify-between items-center border border-stone-700 hover:border-stone-600 transition-colors shadow-sm gap-2">
+                    <div>
+                        <h4 class="font-semibold text-xs md:text-sm text-stone-200">Aneka Gorengan Garing</h4>
+                        <p class="text-xs text-stone-400">Rp 1.500</p>
+                    </div>
+                    <button type="button" onclick="addToCart('Aneka Gorengan', 1500)" class="bg-amber-500 text-stone-950 px-3 py-2 rounded-lg font-bold text-[11px] md:text-xs hover:bg-amber-400 active:scale-95 transition-all duration-200 cursor-pointer shrink-0"><i class="fas fa-plus mr-1"></i>Troli</button>
+                </div>
+                <div class="bg-stone-800 p-3.5 rounded-xl flex justify-between items-center border border-stone-700 hover:border-stone-600 transition-colors shadow-sm gap-2">
+                    <div>
+                        <h4 class="font-semibold text-xs md:text-sm text-amber-400">Wedang Jahe Senthir (Best)</h4>
+                        <p class="text-xs text-stone-400">Rp 6.000</p>
+                    </div>
+                    <button type="button" onclick="addToCart('Wedang Jahe Senthir', 6000)" class="bg-amber-500 text-stone-950 px-3 py-2 rounded-lg font-bold text-[11px] md:text-xs hover:bg-amber-400 active:scale-95 transition-all duration-200 cursor-pointer shrink-0"><i class="fas fa-plus mr-1"></i>Troli</button>
+                </div>
+                <div class="bg-stone-800 p-3.5 rounded-xl flex justify-between items-center border border-stone-700 hover:border-stone-600 transition-colors shadow-sm gap-2">
+                    <div>
+                        <h4 class="font-semibold text-xs md:text-sm text-stone-200">Kopi Hitam / Kopi Joss</h4>
+                        <p class="text-xs text-stone-400">Rp 5.000</p>
+                    </div>
+                    <button type="button" onclick="addToCart('Kopi Hitam/Joss', 5000)" class="bg-amber-500 text-stone-950 px-3 py-2 rounded-lg font-bold text-[11px] md:text-xs hover:bg-amber-400 active:scale-95 transition-all duration-200 cursor-pointer shrink-0"><i class="fas fa-plus mr-1"></i>Troli</button>
+                </div>
+            </div>
+
+            <div class="bg-stone-950 border border-amber-500/30 rounded-2xl p-4 md:p-6 shadow-2xl">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-base md:text-xl font-bold text-amber-500 flex items-center"><i class="fas fa-shopping-basket mr-1.5"></i> Keranjang Belanja</h3>
+                    <button type="button" onclick="resetCart()" id="btn-reset-cart" class="text-[10px] font-semibold text-red-400 hover:text-red-500 border border-red-500/20 hover:border-red-500/50 rounded-lg px-2 py-0.5 transition-all cursor-pointer hidden"><i class="fas fa-trash-alt mr-1"></i>Kosongkan</button>
+                </div>
+                
+                <div id="cart-items" class="text-xs md:text-sm text-stone-400 mb-4 space-y-2 divide-y divide-stone-800">
+                    <p class="text-center py-4 italic text-stone-500">Belum ada menu yang dipilih.</p>
+                </div>
+
+                <div id="distance-warning" class="hidden bg-red-950/40 border border-red-500/30 rounded-xl p-3 text-center mb-4 text-[11px] text-red-400 leading-relaxed">
+                    <i class="fas fa-exclamation-circle mr-1"></i> <strong>Oops! Di Luar Jangkauan.</strong> Lokasi kamu berjarak <span id="warning-km">0</span> km. Maksimal pengantaran kurir kami adalah 5 km. Kamu tetap bisa memesan dengan opsi <strong>Ambil di Lokasi</strong>.
+                </div>
+
+                <div class="border-t border-stone-800 pt-3 space-y-1.5 text-xs text-stone-400 mb-3">
+                    <div class="flex justify-between">
+                        <span>Subtotal Menu:</span>
+                        <span id="summary-subtotal" class="text-stone-200 font-medium">Rp 0</span>
+                    </div>
+                    <div id="row-ongkir" class="flex justify-between hidden">
+                        <span>Ongkos Kirim (<span id="summary-distance">0.0</span> km):</span>
+                        <span id="summary-ongkir" class="text-amber-500 font-medium">Rp 0</span>
+                    </div>
+                </div>
+
+                <div class="flex justify-between font-bold text-base md:text-lg text-stone-100 border-t border-stone-700 pt-3 mb-6">
+                    <span>Total Bayar:</span>
+                    <span id="cart-total" class="text-amber-500">Rp 0</span>
+                </div>
+
+                <div id="pemberitahuan-tutup" class="hidden bg-red-950/40 border border-red-500/30 rounded-xl p-3 text-center mb-4 text-[11px] text-red-400 leading-relaxed">
+                    <i class="fas fa-exclamation-triangle mr-1"></i> Maaf, saat ini Angkringan Senthir sedang Tutup. Jam operasional: 17:00 - 23:59 WIB. Tombol WhatsApp dinonaktifkan sementara.
+                </div>
+
+                <form id="orderForm" onsubmit="sendToWhatsApp(event)" class="space-y-6">
+                    <div>
+                        <label class="block text-xs font-semibold text-stone-400 uppercase tracking-wider mb-2">Nama Pemesan</label>
+                        <input type="text" id="buyerName" required maxlength="50" placeholder="Nama lengkap kamu" class="w-full bg-stone-900/50 border border-stone-800 rounded-xl px-4 py-3 text-stone-100 text-sm focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500 transition-all shadow-inner">
+                    </div>
+                    
+                    <div>
+                        <label class="block text-xs font-semibold text-stone-400 uppercase tracking-wider mb-2">Opsi Pembelian</label>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div onclick="selectDeliveryOption('Ambil Sendiri ke Lokasi')" id="opt-delivery-pickup" class="group relative bg-stone-900/40 border border-amber-500 rounded-xl p-4 cursor-pointer transition-all duration-300 hover:border-amber-500/80 hover:bg-stone-900/60 shadow-md">
+                                <div class="flex items-start gap-3">
+                                    <div class="bg-amber-500 text-stone-950 w-10 h-10 rounded-lg flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                                        <i class="fas fa-store text-base"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-sm text-stone-100">Ambil di Lokasi</h4>
+                                        <p class="text-[11px] text-stone-400 mt-0.5 leading-relaxed">Pesan via WA, lalu ambil mandiri langsung ke gerai Angkringan Senthir.</p>
+                                    </div>
+                                </div>
+                                <div id="check-delivery-pickup" class="absolute top-3 right-3 text-amber-500 text-xs">
+                                    <i class="fas fa-check-circle text-base"></i>
+                                </div>
+                            </div>
+
+                            <div onclick="selectDeliveryOption('Antar ke Rumah')" id="opt-delivery-ship" class="group relative bg-stone-900/20 border border-stone-800 rounded-xl p-4 cursor-pointer transition-all duration-300 hover:border-stone-700 hover:bg-stone-900/40 shadow-sm">
+                                <div class="flex items-start gap-3">
+                                    <div class="bg-stone-800 text-stone-400 group-hover:bg-amber-500/10 group-hover:text-amber-500 w-10 h-10 rounded-lg flex items-center justify-center shrink-0 transition-all">
+                                        <i class="fas fa-motorcycle text-base"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-sm text-stone-200 group-hover:text-stone-100 transition-colors">Diantarkan ke Rumah</h4>
+                                        <p class="text-[11px] text-stone-500 group-hover:text-stone-400 mt-0.5 leading-relaxed">Santai di rumah, kurir kami siap mengantarkan pesanan hangatmu.</p>
+                                    </div>
+                                </div>
+                                <div id="check-delivery-ship" class="absolute top-3 right-3 text-amber-500 text-xs hidden">
+                                    <i class="fas fa-check-circle text-base"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" id="deliveryOption" value="Ambil Sendiri ke Lokasi">
+                    </div>
+
+                    <div id="addressContainer" class="hidden space-y-4 bg-stone-950/40 border border-stone-800/80 p-4 rounded-xl">
+                        <div class="bg-stone-900/30 border border-stone-800/60 p-3.5 rounded-xl flex flex-col sm:flex-row justify-between gap-3 items-start sm:items-center">
+                            <div>
+                                <h5 class="text-xs font-bold text-amber-500 flex items-center gap-1.5"><i class="fas fa-location-crosshairs"></i> Kunci Koordinat GPS</h5>
+                                <p class="text-[10px] text-stone-500 mt-0.5">Wajib dikunci untuk menghitung tarif ongkos kirim otomatis.</p>
+                            </div>
+                            <div class="flex gap-2 w-full sm:w-auto shrink-0">
+                                <button type="button" onclick="getLocation()" class="w-full sm:w-auto bg-amber-500 text-stone-950 text-xs font-bold px-4 py-2 rounded-lg hover:bg-amber-400 transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-md active:scale-95">
+                                    <i class="fas fa-map-marker-alt"></i> Ambil Lokasi Saya
+                                </button>
+                            </div>
+                        </div>
+                        <div class="px-1 flex justify-between items-center text-[11px]">
+                            <span class="text-stone-400">Status Sinkronisasi GPS:</span>
+                            <span id="location-status" class="font-medium italic text-red-400">Lokasi belum terdeteksi</span>
+                        </div>
+                        <input type="hidden" id="buyerLatitude">
+                        <input type="hidden" id="buyerLongitude">
+
+                        <div>
+                            <label class="block text-xs font-semibold text-stone-400 mb-1.5">Alamat Lengkap Pengiriman</label>
+                            <textarea id="buyerAddress" rows="2" placeholder="Tulis nama jalan, nomor rumah, RT/RW, nomor kontak cadangan, atau patokan dekat rumah..." class="w-full bg-stone-900/50 border border-stone-800 rounded-xl px-3 py-2 text-stone-100 text-sm focus:outline-none focus:border-amber-500 transition-all"></textarea>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-stone-400 uppercase tracking-wider mb-2">Metode Pembayaran</label>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div onclick="selectPaymentMethod('Bayar Tunai / COD')" id="opt-payment-cod" class="group relative bg-stone-900/40 border border-amber-500 rounded-xl p-4 cursor-pointer transition-all duration-300 hover:border-amber-500/80 hover:bg-stone-900/60 shadow-md">
+                                <div class="flex items-start gap-3">
+                                    <div class="bg-amber-500 text-stone-950 w-10 h-10 rounded-lg flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform">
+                                        <i class="fas fa-money-bill-wave text-base"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-sm text-stone-100">Tunai / COD</h4>
+                                        <p class="text-[11px] text-stone-400 mt-0.5 leading-relaxed">Bayar langsung di tempat saat mengambil makanan atau ketika kurir sampai.</p>
+                                    </div>
+                                </div>
+                                <div id="check-payment-cod" class="absolute top-3 right-3 text-amber-500 text-xs">
+                                    <i class="fas fa-check-circle text-base"></i>
+                                </div>
+                            </div>
+
+                            <div onclick="selectPaymentMethod('Transfer QRIS / E-Wallet')" id="opt-payment-qris" class="group relative bg-stone-900/20 border border-stone-800 rounded-xl p-4 cursor-pointer transition-all duration-300 hover:border-stone-700 hover:bg-stone-900/40 shadow-sm">
+                                <div class="flex items-start gap-3">
+                                    <div class="bg-stone-800 text-stone-400 group-hover:bg-amber-500/10 group-hover:text-amber-500 w-10 h-10 rounded-lg flex items-center justify-center shrink-0 transition-all">
+                                        <i class="fas fa-qrcode text-base"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-sm text-stone-200 group-hover:text-stone-100 transition-colors">QRIS / E-Wallet</h4>
+                                        <p class="text-[11px] text-stone-500 group-hover:text-stone-400 mt-0.5 leading-relaxed">Scan QRIS instan lewat GoPay, OVO, Dana, LinkAja, atau Mobile Banking.</p>
+                                    </div>
+                                </div>
+                                <div id="check-payment-qris" class="absolute top-3 right-3 text-amber-500 text-xs hidden">
+                                    <i class="fas fa-check-circle text-base"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" id="paymentMethod" value="Bayar Tunai / COD">
+                    </div>
+
+                    <div id="qrisContainer" class="hidden mt-3 p-4 bg-stone-950/40 border border-stone-800/80 rounded-xl text-center transition-all duration-300">
+                        <p class="text-xs font-semibold text-amber-400 mb-3 flex items-center justify-center gap-1.5"><i class="fas fa-shield-alt"></i> Pembayaran QRIS Resmi Terverifikasi</p>
+                        
+                        <div class="bg-white p-2.5 rounded-xl inline-block shadow-lg mb-3">
+                            <img id="qrisImage" src="qr.jpeg" crossorigin="anonymous" alt="QRIS Angkringan Senthir" class="w-40 h-40 md:w-44 md:h-44 object-contain mx-auto" onerror="this.src='https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=AngkringanSenthir'">
+                        </div>
+                        
+                        <div class="mb-4">
+                            <button type="button" onclick="downloadQRIS()" id="btn-download-qris" class="inline-flex items-center gap-1.5 bg-stone-900 border border-stone-700 text-stone-300 hover:text-amber-500 hover:border-amber-500 text-xs font-bold px-4 py-2 rounded-lg transition-all cursor-pointer shadow-sm active:scale-95">
+                                <i class="fas fa-download"></i> Simpan / Unduh QRIS
+                            </button>
+                        </div>
+                        
+                        <div class="pt-4 border-t border-stone-900 text-left max-w-sm mx-auto">
+                            <label class="block text-xs font-semibold text-stone-400 mb-1.5"><i class="fas fa-cloud-upload-alt mr-1 text-amber-500"></i> Unggah Bukti Pembayaran</label>
+                            <input type="file" id="paymentProof" accept="image/*" class="w-full text-xs text-stone-400 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-amber-500/10 file:text-amber-500 hover:file:bg-amber-500/20 file:cursor-pointer bg-stone-900/40 p-2 border border-stone-800/60 rounded-xl focus:outline-none">
+                            <p class="text-[9px] text-stone-500 mt-1.5 italic">*Format gambar (JPG, PNG). Mohon unggah bukti transfer jika sudah membayar.</p>
+                        </div>
+                        <p class="text-[10px] md:text-[11px] text-stone-400 leading-relaxed max-w-xs mx-auto px-1 mt-4 text-center">
+                            Silakan unduh atau scan QRIS di atas. Kamu bisa langsung bayar sekarang atau nanti setelah admin mengonfirmasi total pesanan lewat WhatsApp.
+                        </p>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-stone-400 mb-1.5">Catatan Tambahan (Opsional)</label>
+                        <textarea id="buyerNotes" rows="2" placeholder="Contoh: sate usus bakar kering, jahe agak manis, dll." class="w-full bg-stone-900 border border-stone-700 rounded-lg px-3 py-2 text-stone-100 text-sm focus:outline-none focus:border-amber-500 transition-all"></textarea>
+                    </div>
+
+                    <button type="submit" id="btn-submit-wa" disabled class="btn-wa-animate w-full bg-emerald-600 text-white py-3.5 rounded-xl font-bold flex justify-center items-center gap-1.5 hover:bg-emerald-500 disabled:bg-stone-800 disabled:text-stone-600 disabled:cursor-not-allowed disabled:border disabled:border-stone-700 transition-all duration-200 text-xs md:text-sm mt-5 cursor-pointer shadow-lg shadow-emerald-950/20">
+                        <i class="fab fa-whatsapp text-base md:text-lg"></i> Kirim Struk via WhatsApp
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <section id="sosmed" data-aos="fade-up" class="py-12 md:py-16 px-4">
+    <h2 class="text-2xl md:text-3xl font-bold text-amber-500 text-center mb-1">Temukan & Ikuti Kami</h2>
+    <p class="text-stone-400 text-center text-xs md:text-sm mb-8">Kunjungi angkringan kami atau ikuti keseruan kami di media sosial!</p>
+    
+    <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-8 items-center">
+        <!-- Frame Peta Estetik -->
+        <div class="w-full h-80 bg-stone-950 p-2 rounded-2xl border border-stone-800 shadow-2xl relative overflow-hidden group">
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2188.2811358209624!2d107.06492784908691!3d-6.4020791643262696!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6997004dede597%3A0x6bf1769294a59ccf!2sANGKRINGAN%20SENTHIR!5e0!3m2!1sid!2sid!4v1780734879837!5m2!1sid!2sid" 
+                class="w-full h-full rounded-xl grayscale hover:grayscale-0 transition-all duration-700 opacity-80 hover:opacity-100" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+            
+            <div class="absolute bottom-6 left-6 right-6 bg-stone-900/90 backdrop-blur-md p-4 rounded-xl border border-stone-700 shadow-lg">
+                <p class="text-amber-500 font-bold text-xs flex items-center mb-1">
+                    <i class="fas fa-map-marker-alt mr-2"></i> LOKASI KAMI
+                </p>
+                <p class="text-stone-300 text-xs">Jayasampurna, Serang Baru, Bekasi</p>
+            </div>
+        </div>
+        
+        <!-- Tombol Sosial Media -->
+        <div class="flex flex-col gap-4">
+            <a href="https://instagram.com/username_anda" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 bg-gradient-to-r from-purple-600 via-pink-600 to-yellow-500 text-white font-semibold py-4 px-6 rounded-2xl shadow-lg hover:scale-[1.02] active:scale-95 transition-all duration-300">
+                <i class="fab fa-instagram text-2xl"></i>
+                <div>
+                    <div class="text-xs opacity-90">Follow kami di</div>
+                    <div class="text-sm">Instagram</div>
+                </div>
+            </a>
+            
+            <a href="https://tiktok.com/@username_anda" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 bg-stone-950 border border-stone-800 text-white font-semibold py-4 px-6 rounded-2xl shadow-lg hover:bg-stone-900 hover:scale-[1.02] active:scale-95 transition-all duration-300">
+                <i class="fab fa-tiktok text-2xl"></i>
+                <div>
+                    <div class="text-xs text-stone-400">Lihat konten di</div>
+                    <div class="text-sm">TikTok</div>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+    </div>
+
+    <footer class="bg-stone-950 border-t border-stone-800/60 py-4 px-4 select-none">
+        <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2.5 text-center sm:text-left">
+            
+            <div class="flex flex-col sm:flex-row items-center gap-1 sm:gap-2">
+                <span class="text-amber-500 font-bold text-xs tracking-wider">ANGKRINGAN SENTHIR</span>
+                <span class="text-stone-700 hidden sm:inline">|</span>
+                <span class="text-stone-400 text-[10px] md:text-xs italic">"Kopi Nikmat Kebersamaan Terjaga"</span>
+            </div>
+            
+            <div class="flex flex-col sm:flex-row items-center gap-1.5 sm:gap-3">
+                <div class="bg-stone-900/60 border border-stone-800/80 px-2.5 py-1 rounded-lg text-[10px] md:text-[11px] text-stone-400 font-medium shadow-inner flex items-center gap-1 hover:border-amber-500/20 hover:text-stone-300 transition-all duration-300">
+                    <span>Developed by</span>
+                    <a href="https://dimas-hidayat.netlify.app" target="_blank" rel="noopener noreferrer" class="text-amber-500 font-semibold hover:text-amber-400 hover:underline flex items-center gap-0.5 cursor-pointer transition-colors duration-200">
+                        <i class="fas fa-code text-[9px] mr-0.5"></i>Dimas
+                    </a>
+                </div>
+                <p class="text-[9px] text-stone-600 sm:border-l sm:border-stone-800 sm:pl-3">© 2026. All Rights Reserved.</p>
+            </div>
+
+        </div>
+    </footer>
+
+    <script>
+        const NO_WHATSAPP = "6285880706634"; // Nomor WhatsApp Admin Angkringan
+        
+        // --- KOORDINAT GERAI UTAMA ANGKRINGAN SENTHIR ---
+        // Ganti koordinat latitude & longitude di bawah sesuai dengan titik GPS asli toko Anda
+        const SENTHIR_LAT = -6.2856; 
+        const SENTHIR_LON = 106.9749;
+
+        let cart = [];
+        let isStoreOpen = true;
+        let currentDistanceKm = 0; // Menyimpan jarak hitung dinamis
+        let currentOngkir = 0;     // Menyimpan tarif ongkir dinamis
+        let isOutOfRange = false;  // Penanda jika jarak > 5 km
+
+        // --- Validasi Jam Operasional Toko Otomatis ---
+        function checkStoreStatus() {
+            const now = new Date();
+            const currentHour = now.getHours();
+            
+            const openHour = 17; // 17:00 WIB
+            const closeHour = 24; // 23:59 WIB
+            const badge = document.getElementById('status-toko-badge');
+            
+            if (currentHour >= openHour && currentHour < closeHour) {
+                isStoreOpen = true;
+                badge.innerText = "🟢 Buka (17:00 - 24:00)";
+                badge.className = "mt-4 px-4 py-1.5 rounded-full font-bold text-[10px] md:text-xs uppercase tracking-widest shadow-md bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 animate-pulse";
+                document.getElementById('pemberitahuan-tutup').classList.add('hidden');
+            } else {
+                isStoreOpen = false;
+                badge.innerText = "🔴 Tutup (Buka Jam 17:00)";
+                badge.className = "mt-4 px-4 py-1.5 rounded-full font-bold text-[10px] md:text-xs uppercase tracking-widest shadow-md bg-red-500/20 text-red-400 border border-red-500/30";
+            }
+            updateCartUI();
+        }
+
+        checkStoreStatus();
+        setInterval(checkStoreStatus, 60000);
+
+        // Logika Tab Navigasi Aktif
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                navLinks.forEach(item => item.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // --- KONTROLLER DASHBOARD INTERAKTIF: OPSI PENGIRIMAN ---
+        function selectDeliveryOption(value) {
+            document.getElementById('deliveryOption').value = value;
+
+            const cardPickup = document.getElementById('opt-delivery-pickup');
+            const cardShip = document.getElementById('opt-delivery-ship');
+            const checkPickup = document.getElementById('check-delivery-pickup');
+            const checkShip = document.getElementById('check-delivery-ship');
+
+            if (value === 'Ambil Sendiri ke Lokasi') {
+                cardPickup.className = "group relative bg-stone-900/40 border border-amber-500 rounded-xl p-4 cursor-pointer transition-all duration-300 shadow-md";
+                cardShip.className = "group relative bg-stone-900/20 border border-stone-800 rounded-xl p-4 cursor-pointer transition-all duration-300 hover:border-stone-700 hover:bg-stone-900/40 shadow-sm";
+                checkPickup.classList.remove('hidden');
+                checkShip.classList.add('hidden');
+            } else {
+                cardShip.className = "group relative bg-stone-900/40 border border-amber-500 rounded-xl p-4 cursor-pointer transition-all duration-300 shadow-md";
+                cardPickup.className = "group relative bg-stone-900/20 border border-stone-800 rounded-xl p-4 cursor-pointer transition-all duration-300 hover:border-stone-700 hover:bg-stone-900/40 shadow-sm";
+                checkShip.classList.remove('hidden');
+                checkPickup.classList.add('hidden');
+            }
+            toggleAddressField();
+        }
+
+        // --- KONTROLLER DASHBOARD INTERAKTIF: METODE PEMBAYARAN ---
+        function selectPaymentMethod(value) {
+            document.getElementById('paymentMethod').value = value;
+
+            const cardCod = document.getElementById('opt-payment-cod');
+            const cardQris = document.getElementById('opt-payment-qris');
+            const checkCod = document.getElementById('check-payment-cod');
+            const checkQris = document.getElementById('check-payment-qris');
+
+            if (value === 'Bayar Tunai / COD') {
+                cardCod.className = "group relative bg-stone-900/40 border border-amber-500 rounded-xl p-4 cursor-pointer transition-all duration-300 shadow-md";
+                cardQris.className = "group relative bg-stone-900/20 border border-stone-800 rounded-xl p-4 cursor-pointer transition-all duration-300 hover:border-stone-700 hover:bg-stone-900/40 shadow-sm";
+                checkCod.classList.remove('hidden');
+                checkQris.classList.add('hidden');
+            } else {
+                cardQris.className = "group relative bg-stone-900/40 border border-amber-500 rounded-xl p-4 cursor-pointer transition-all duration-300 shadow-md";
+                cardCod.className = "group relative bg-stone-900/20 border border-stone-800 rounded-xl p-4 cursor-pointer transition-all duration-300 hover:border-stone-700 hover:bg-stone-900/40 shadow-sm";
+                checkQris.classList.remove('hidden');
+                checkCod.classList.add('hidden');
+            }
+            toggleQrisField();
+        }
+
+        function toggleAddressField() {
+            const deliveryOption = document.getElementById('deliveryOption').value;
+            const addressContainer = document.getElementById('addressContainer');
+            const buyerAddress = document.getElementById('buyerAddress');
+
+            if (deliveryOption === "Antar ke Rumah") {
+                addressContainer.classList.remove('hidden');
+                addressContainer.classList.add('animate-fadeIn');
+                buyerAddress.setAttribute('required', 'true');
+            } else {
+                addressContainer.classList.add('hidden');
+                addressContainer.classList.remove('animate-fadeIn');
+                buyerAddress.removeAttribute('required');
+                buyerAddress.value = "";
+                
+                // Reset data GPS & Ongkir saat user balik ke opsi ambil sendiri
+                document.getElementById('buyerLatitude').value = "";
+                document.getElementById('buyerLongitude').value = "";
+                document.getElementById('location-status').innerText = "Lokasi belum terdeteksi";
+                document.getElementById('location-status').className = "font-medium italic text-red-400";
+                
+                currentDistanceKm = 0;
+                currentOngkir = 0;
+                isOutOfRange = false;
+                document.getElementById('distance-warning').classList.add('hidden');
+            }
+            updateCartUI();
+        }
+
+        function toggleQrisField() {
+            const paymentMethod = document.getElementById('paymentMethod').value;
+            const qrisContainer = document.getElementById('qrisContainer');
+            const paymentProof = document.getElementById('paymentProof');
+
+            if (paymentMethod === "Transfer QRIS / E-Wallet") {
+                qrisContainer.classList.remove('hidden');
+                qrisContainer.classList.add('animate-fadeIn');
+            } else {
+                qrisContainer.classList.add('hidden');
+                qrisContainer.classList.remove('animate-fadeIn');
+                paymentProof.value = "";
+            }
+        }
+
+        // --- RUMUS HAVERSINE MATEMATIKA: HITUNG JARAK DUA KOORDINAT GPS ---
+        function calculateHaversineDistance(lat1, lon1, lat2, lon2) {
+            const R = 6371; // Jari-jari bumi dalam satuan kilometer
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLon = (lon2 - lon1) * Math.PI / 180;
+            
+            const a = 
+                Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+                
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            const distance = R * c; 
+            return distance; // Menghasilkan output jarak pecahan desimal (km)
+        }
+
+        // --- LOGIKA PENENTUAN TARIF ONGKIR BERDASARKAN JARAK ---
+        function determineOngkirRate(distance) {
+            if (distance >= 0 && distance <= 1) {
+                return 3000;
+            } else if (distance > 1 && distance <= 2) {
+                return 5000;
+            } else if (distance > 2 && distance <= 3) {
+                return 10000;
+            } else if (distance > 3 && distance <= 5) {
+                return 15000;
+            } else {
+                return -1; // Penanda khusus jika jarak > 5 km (di luar jangkauan kurir)
+            }
+        }
+
+        // --- SINKRONISASI API GEOLOCATION & UPDATE SYNC JARAK ONGKIR ---
+        function getLocation() {
+            const statusText = document.getElementById('location-status');
+            if (navigator.geolocation) {
+                statusText.innerText = "Mencari koordinat...";
+                statusText.className = "font-medium italic text-amber-400 animate-pulse";
+                
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const userLat = position.coords.latitude;
+                        const userLon = position.coords.longitude;
+                        
+                        document.getElementById('buyerLatitude').value = userLat;
+                        document.getElementById('buyerLongitude').value = userLon;
+
+                        // Hitung Jarak Menggunakan Haversine
+                        const distance = calculateHaversineDistance(SENTHIR_LAT, SENTHIR_LON, userLat, userLon);
+                        currentDistanceKm = parseFloat(distance.toFixed(2)); // Ambil 2 angka di belakang koma desimal
+
+                        // Tentukan Ongkir
+                        const rate = determineOngkirRate(currentDistanceKm);
+
+                        if (rate === -1) {
+                            // Skenario Jarak > 5 km (Luar Jangkauan)
+                            currentOngkir = 0;
+                            isOutOfRange = true;
+                            statusText.innerText = `⚠️ Terdeteksi (${currentDistanceKm} km) Diluar Jangkauan`;
+                            statusText.className = "font-bold text-red-400";
+                            document.getElementById('warning-km').innerText = currentDistanceKm;
+                            document.getElementById('distance-warning').classList.remove('hidden');
+                        } else {
+                            // Skenario Jarak Masuk Jangkauan Aman (<= 5 km)
+                            currentOngkir = rate;
+                            isOutOfRange = false;
+                            statusText.innerText = `🔒 GPS Terkunci (${currentDistanceKm} km)`;
+                            statusText.className = "font-bold text-emerald-400";
+                            document.getElementById('distance-warning').classList.add('hidden');
+                            showToast("Koordinat GPS & Ongkir berhasil disinkronisasi!");
+                        }
+
+                        // Perbarui UI Dashboard Kasir
+                        updateCartUI();
+                    },
+                    (error) => {
+                        statusText.innerText = "Gagal memuat GPS. Silakan tulis manual.";
+                        statusText.className = "font-medium italic text-red-400";
+                        alert("Gagal mengambil lokasi GPS. Pastikan izin lokasi browser/ponsel Anda telah aktif.");
+                    },
+                    { enableHighAccuracy: true, timeout: 8000 }
+                );
+            } else {
+                statusText.innerText = "Browser tidak mendukung GPS.";
+                statusText.className = "font-medium italic text-stone-500";
+            }
+        }
+
+        // Fungsi Download Gambar QRIS Otomatis Teroptimasi Mobile
+        function downloadQRIS() {
+            const qrisImg = document.getElementById('qrisImage');
+            if (!qrisImg || !qrisImg.src) {
+                alert("Gambar QRIS belum siap diunduh.");
+                return;
+            }
+
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            const img = new Image();
+            
+            img.crossOrigin = 'anonymous';
+            img.src = qrisImg.src;
+            
+            img.onload = function() {
+                canvas.width = img.naturalWidth;
+                canvas.height = img.naturalHeight;
+                ctx.drawImage(img, 0, 0);
+                
+                try {
+                    const dataUrl = canvas.toDataURL('image/png');
+                    const link = document.createElement('a');
+                    link.href = dataUrl;
+                    link.download = 'QRIS_Angkringan_Senthir.png';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    showToast("QRIS berhasil diunduh!");
+                } catch (error) {
+                    window.open(qrisImg.src, '_blank');
+                }
+            };
+        }
+
+        function addToCart(name, price) {
+            const itemIndex = cart.findIndex(item => item.name === name);
+            if (itemIndex > -1) {
+                cart[itemIndex].qty += 1;
+            } else {
+                cart.push({ name, price, qty: 1 });
+            }
+            showToast(`${name} masuk troli!`);
+            updateCartUI();
+        }
+
+        function resetCart() {
+            if (confirm("Apakah Anda yakin ingin mengosongkan seluruh isi keranjang belanja?")) {
+                cart = [];
+                updateCartUI();
+                showToast("Keranjang dikosongkan!");
+            }
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-text').innerText = message;
+            toast.classList.remove('opacity-0', 'pointer-events-none', '-translate-y-4');
+            toast.classList.add('opacity-100', 'translate-y-0');
+            
+            setTimeout(() => {
+                toast.classList.remove('opacity-100', 'translate-y-0');
+                toast.classList.add('opacity-0', 'pointer-events-none', '-translate-y-4');
+            }, 2000);
+        }
+
+        // UI List Item Belanja yang Fleksibel & Tidak Terpotong di Layar Kecil
+        function updateCartUI() {
+            const cartItemsEl = document.getElementById('cart-items');
+            const cartTotalEl = document.getElementById('cart-total');
+            const cartCountEl = document.getElementById('cart-count');
+            const btnSubmitWA = document.getElementById('btn-submit-wa');
+            const btnResetCart = document.getElementById('btn-reset-cart');
+            const warningTutup = document.getElementById('pemberitahuan-tutup');
+            
+            const summarySubtotalEl = document.getElementById('summary-subtotal');
+            const rowOngkirEl = document.getElementById('row-ongkir');
+            const summaryDistanceEl = document.getElementById('summary-distance');
+            const summaryOngkirEl = document.getElementById('summary-ongkir');
+            const deliveryOption = document.getElementById('deliveryOption').value;
+
+            if (cart.length === 0) {
+                cartItemsEl.innerHTML = `<p class="text-center py-4 italic text-stone-500">Belum ada menu yang dipilih.</p>`;
+                cartTotalEl.innerText = 'Rp 0';
+                summarySubtotalEl.innerText = 'Rp 0';
+                rowOngkirEl.classList.add('hidden');
+                cartCountEl.classList.add('hidden');
+                btnResetCart.classList.add('hidden');
+                btnSubmitWA.setAttribute('disabled', 'true');
+                return;
+            }
+
+            cartCountEl.classList.remove('hidden');
+            btnResetCart.classList.remove('hidden');
+            cartCountEl.innerText = cart.reduce((sum, item) => sum + item.qty, 0);
+
+            let html = '';
+            let subtotalMenu = 0;
+
+            cart.forEach((item, index) => {
+                let subtotal = item.price * item.qty;
+                subtotalMenu += subtotal;
+                html += `
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center py-3 gap-2">
+                        <div class="max-w-full overflow-hidden text-ellipsis">
+                            <p class="font-medium text-stone-200 text-xs md:text-sm">${item.name}</p>
+                            <p class="text-[11px] text-stone-500">Rp ${item.price.toLocaleString('id-ID')} / porsi</p>
+                        </div>
+                        <div class="flex items-center justify-between sm:justify-end w-full sm:w-auto gap-3 border-t border-stone-900 sm:border-t-0 pt-2 sm:pt-0">
+                            <div class="flex items-center bg-stone-900 border border-stone-700 rounded-lg overflow-hidden">
+                                <button type="button" onclick="changeQty(${index}, -1)" class="text-amber-500 hover:bg-stone-800 px-2.5 py-1 text-xs font-bold cursor-pointer"><i class="fas fa-minus"></i></button>
+                                <span class="text-stone-200 text-xs font-semibold px-1 w-6 text-center select-none">${item.qty}</span>
+                                <button type="button" onclick="changeQty(${index}, 1)" class="text-amber-500 hover:bg-stone-800 px-2.5 py-1 text-xs font-bold cursor-pointer"><i class="fas fa-plus"></i></button>
+                            </div>
+                            <div class="flex items-center gap-2 min-w-[85px] justify-end">
+                                <span class="font-semibold text-amber-500 text-xs md:text-sm">Rp ${subtotal.toLocaleString('id-ID')}</span>
+                                <button type="button" onclick="removeFromCart(${index})" class="text-red-400 hover:text-red-500 text-xs p-1 cursor-pointer"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            cartItemsEl.innerHTML = html;
+            summarySubtotalEl.innerText = 'Rp ' + subtotalMenu.toLocaleString('id-ID');
+
+            // Hitung Grand Total Akumulasi Ongkir
+            let grandTotal = subtotalMenu;
+            if (deliveryOption === "Antar ke Rumah") {
+                rowOngkirEl.classList.remove('hidden');
+                summaryDistanceEl.innerText = currentDistanceKm;
+                summaryOngkirEl.innerText = 'Rp ' + currentOngkir.toLocaleString('id-ID');
+                grandTotal += currentOngkir;
+            } else {
+                rowOngkirEl.classList.add('hidden');
+            }
+
+            cartTotalEl.innerText = 'Rp ' + grandTotal.toLocaleString('id-ID');
+
+            // Validasi Kunci Pengiriman (Store Status vs Jarak Maksimal Jangkauan)
+            if (!isStoreOpen) {
+                btnSubmitWA.setAttribute('disabled', 'true');
+                btnSubmitWA.innerHTML = `<i class="fas fa-lock mr-1"></i> Angkringan Sudah Tutup`;
+                warningTutup.classList.remove('hidden');
+            } else if (deliveryOption === "Antar ke Rumah" && isOutOfRange) {
+                btnSubmitWA.setAttribute('disabled', 'true');
+                btnSubmitWA.innerHTML = `<i class="fas fa-ban mr-1"></i> Di Luar Jangkauan Kurir`;
+                warningTutup.classList.add('hidden');
+            } else {
+                btnSubmitWA.removeAttribute('disabled');
+                btnSubmitWA.innerHTML = `<i class="fab fa-whatsapp text-base md:text-lg"></i> Kirim Struk via WhatsApp`;
+                warningTutup.classList.add('hidden');
+            }
+        }
+
+        function changeQty(index, amount) {
+            cart[index].qty += amount;
+            if (cart[index].qty <= 0) {
+                removeFromCart(index);
+            } else {
+                updateCartUI();
+            }
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function sendToWhatsApp(event) {
+            event.preventDefault();
+            if (cart.length === 0 || !isStoreOpen) return;
+
+            const name = document.getElementById('buyerName').value.trim();
+            const option = document.getElementById('deliveryOption').value;
+            const address = document.getElementById('buyerAddress').value.trim();
+            const lat = document.getElementById('buyerLatitude').value;
+            const lon = document.getElementById('buyerLongitude').value;
+            const payment = document.getElementById('paymentMethod').value; 
+            const paymentProof = document.getElementById('paymentProof');
+            const notes = document.getElementById('buyerNotes').value.trim() || "-";
+            
+            if (!name) {
+                alert("Mohon masukkan nama valid!");
+                return;
+            }
+
+            if (option === "Antar ke Rumah") {
+                if (!address) {
+                    alert("Mohon isi alamat lengkap pengantaran!");
+                    return;
+                }
+                if (!lat || !lon) {
+                    alert("Wajib klik tombol 'Ambil Lokasi Saya' terlebih dahulu untuk menghitung koordinat GPS!");
+                    return;
+                }
+                if (isOutOfRange) {
+                    alert("Maaf, lokasi pengiriman di luar jangkauan kurir kami (Maksimal 5 km)!");
+                    return;
+                }
+            }
+
+            let infoBuktiBayar = "Tidak Ada / COD";
+            if (payment === "Transfer QRIS / E-Wallet") {
+                if (paymentProof.files.length > 0) {
+                    infoBuktiBayar = `✅ Sudah Diunggah (${paymentProof.files[0].name})`;
+                } else {
+                    infoBuktiBayar = "❌ Belum Diunggah (Akan Menyusul / Bayar Nanti)";
+                }
+            }
+
+            let subtotalMenu = 0;
+            const invoiceNum = "AS-" + Math.floor(1000 + Math.random() * 9000);
+            const date = new Date().toLocaleDateString('id-ID');
+
+            let textWhatsApp = `*📑 STRUK PEMESANAN - ANGKRINGAN SENTHIR*\n`;
+            textWhatsApp += `--------------------------------------------------------\n`;
+            textWhatsApp += `*No Struk :* ${invoiceNum}\n`;
+            textWhatsApp += `*Tanggal  :* ${date}\n`;
+            textWhatsApp += `*Nama     :* ${name}\n`;
+            textWhatsApp += `*Opsi Beli:* ${option}\n`;
+            
+            if (option === "Antar ke Rumah") {
+                textWhatsApp += `*Jarak     :* ${currentDistanceKm} km\n`;
+                textWhatsApp += `*Alamat   :* ${address}\n`;
+                textWhatsApp += `*Maps GPS :* http://maps.google.com/maps?q=${lat},${lon}\n`;
+            }
+
+            textWhatsApp += `*Bayar Via:* ${payment}\n`; 
+            
+            if (payment === "Transfer QRIS / E-Wallet") {
+                textWhatsApp += `*Bukti TF :* ${infoBuktiBayar}\n`;
+            }
+
+            textWhatsApp += `--------------------------------------------------------\n\n`;
+            textWhatsApp += `*DAFTAR PESANAN:*\n`;
+
+            cart.forEach(item => {
+                let subtotal = item.price * item.qty;
+                subtotalMenu += subtotal;
+                textWhatsApp += `• ${item.name} (${item.qty}x) = Rp ${subtotal.toLocaleString('id-ID')}\n`;
+            });
+
+            textWhatsApp += `\n--------------------------------------------------------\n`;
+            textWhatsApp += `*Subtotal Menu :* Rp ${subtotalMenu.toLocaleString('id-ID')}\n`;
+            
+            if (option === "Antar ke Rumah") {
+                textWhatsApp += `*Ongkos Kirim :* Rp ${currentOngkir.toLocaleString('id-ID')}\n`;
+            }
+            
+            let totalAkhir = subtotalMenu + (option === "Antar ke Rumah" ? currentOngkir : 0);
+            textWhatsApp += `*TOTAL BAYAR  :* Rp ${totalAkhir.toLocaleString('id-ID')}\n`;
+            textWhatsApp += `--------------------------------------------------------\n`;
+            textWhatsApp += `*Catatan Tambahan:* _${notes}_\n\n`;
+            
+            if (payment === "Transfer QRIS / E-Wallet" && paymentProof.files.length > 0) {
+                textWhatsApp += `*PENTING:* Mohon lampirkan juga foto bukti transfer tadi di chat ini ya kak agar admin bisa langsung memprosesnya. 🙏\n\n`;
+            }
+            
+            textWhatsApp += `Terima kasih banyak telah memesan di Angkringan Senthir! Mohon tunggu balasan konfirmasi dari kami ya kak. 🙌☕`;
+
+            const encodeText = encodeURIComponent(textWhatsApp);
+            const url = `https://api.whatsapp.com/send?phone=${NO_WHATSAPP}&text=${encodeText}`;
+            
+            window.location.href = url;
+        }
+    </script>
+</body>
+</html>
